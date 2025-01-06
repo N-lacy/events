@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header id="branding">
+            <h1>Admin Panel</h1>
+        </header>
+        <main>
+            <form id="create-event-form">
+                <h2>Create Event</h2>
+                <label for="event_name">Event Name:</label>
+                <input type="text" id="event_name" name="event_name" required><br>
+
+                <label for="required_fields">Required Fields (comma separated):</label>
+                <input type="text" id="required_fields" name="required_fields" required><br>
+                
+                <label for="mandatory_students">Mandatory Students (comma separated):</label>
+                <input type="text" id="mandatory_students" name="mandatory_students"><br>
+                
+                <label for="event_date">Event Date:</label>
+                <input type="date" id="event_date" name="event_date" required><br>
+                
+                <label for="num_students">Number of Students:</label>
+                <input type="number" id="num_students" name="num_students" required><br>
+                
+                <button type="submit">Create Event</button>
+            </form>
+
+            <div id="qr_code_section" class="qr-code-section" style="display: none;">
+                <h2>Event QR Code</h2>
+                <img id="qr_code_image" src="" alt="Event QR Code">
+                <br>
+                <a id="qr_code_download" href="" download>Download QR Code</a>
+            </div>
+
+            <h2>Events</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Number of Applications</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                    <tr>
+                        <td>{{ event.event_name }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.applications|length }}</td>
+                        <td>
+                            <a href="{{ url_for('view_applicants', event_id=event.event_id) }}">View Applicants</a>
+                            <button onclick="selectStudents('{{ event.event_id }}')">Generate Final List</button>
+                            <a href="{{ url_for('static', filename='qr_codes/' + event.event_id + '_qr.png') }}" download>Download QR Code</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <p>&copy; 2025 University Event System. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

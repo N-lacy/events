@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Event Application</h1>
+            <p>Apply for university events using the form below.</p>
+        </header>
+        <main>
+            <form id="apply-form">
+                <label for="student_id">Student ID:</label>
+                <input type="text" id="student_id" name="student_id" required><br>
+
+                <label for="event_name">Event Name:</label>
+                <input type="text" id="event_name" name="event_name" required disabled><br>
+                
+                <label for="event_date">Event Date:</label>
+                <input type="date" id="event_date" name="event_date" required disabled><br>
+                
+                <!-- Additional fields will be added dynamically based on event requirements -->
+                <div id="additional-fields"></div>
+                
+                <button type="button" onclick="apply()">Apply</button>
+            </form>
+        </main>
+        <footer>
+            <p>&copy; 2025 University Event System. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/event.js') }}"></script>
+</body>
+</html>

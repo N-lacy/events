@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Event System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>University Event System</h1>
+            <p>Your gateway to participating in and managing university events.</p>
+        </header>
+        <main>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li>Randomly select students for events</li>
+                    <li>Ensure fair chances for students who haven't been selected before</li>
+                    <li>Collect different student information for different events</li>
+                    <li>Generate QR codes for event links</li>
+                </ul>
+            </section>
+            <section>
+                <h3>For Admins</h3>
+                <a class="button" href="/login">Admin Login</a>
+            </section>
+            <section>
+                <h3>For Students</h3>
+                <a class="button" href="/apply">Apply for Events</a>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 University Event System. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

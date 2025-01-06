@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicants for {{ event.event_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Applicants for {{ event.event_name }}</h1>
+            <p>Event Date: {{ event.event_date }}</p>
+        </header>
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Passport Number</th>
+                        <th>Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{ application.student.id }}</td>
+                        <td>{{ application.student.name }}</td>
+                        <td>{{ application.student.passport_number }}</td>
+                        <td>{{ application.student.phone_number }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button onclick="generateSelectedStudents('{{ event.event_id }}')">Generate Final List</button>
+        </main>
+        <footer>
+            <p>&copy; 2025 University Event System. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        function generateSelectedStudents(eventId) {
+            fetch('/select_students', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ event_id: eventId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.selected_students) {
+                    alert('Selected students: ' + data.selected_students.join(', '));
+                    location.reload(); // Reload the page to reflect the updated selection status
+                } else {
+                    alert('Failed to generate final list.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>

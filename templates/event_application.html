@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event_name }} Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ event_name }}</h1>
+            <p>Event Date: {{ event_date }}</p>
+            <p>Apply for this event by filling out the form below.</p>
+        </header>
+        <main>
+            <form id="apply-form">
+                <input type="hidden" id="event_id" name="event_id" value="{{ event_id }}">
+                <label for="student_id">Student ID:</label>
+                <input type="text" id="student_id" name="student_id" required><br>
+                <label for="student_name">Student Name:</label>
+                <input type="text" id="student_name" name="student_name" required><br>
+                <label for="student_passport_number">Passport Number:</label>
+                <input type="text" id="student_passport_number" name="student_passport_number"><br>
+                <label for="student_phone_number">Phone Number:</label>
+                <input type="text" id="student_phone_number" name="student_phone_number"><br>
+                
+                <button type="button" onclick="apply()">Apply</button>
+            </form>
+        </main>
+        <footer>
+            <p>&copy; 2025 University Event System. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/application.js') }}"></script>
+</body>
+</html>
